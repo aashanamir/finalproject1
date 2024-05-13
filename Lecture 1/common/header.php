@@ -1,5 +1,7 @@
 <?php
 include_once("includes/config.php");
+ob_start();
+session_start();
 ?>
 
 <!DOCTYPE html>

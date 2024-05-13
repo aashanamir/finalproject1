@@ -1,10 +1,13 @@
 <?php
 require_once("../includes/config.php");
+ob_start();
+session_start();
 
 $Error = [];
 
 if(isset($_POST))
 {
+
   $username = $_POST["username"];
   $email = $_POST["email"];
   $password = $_POST["password"];
@@ -20,6 +23,8 @@ if(isset($_POST))
     $_SESSION['errors'] = $Error;
 
     header('location:'.BASEURL.'/signup.php');
+
+    exit();
   }
 
 }

@@ -3,6 +3,10 @@
 ?>  
 
 <style>
+.error{
+    color: red;
+    list-style: none;
+}
 
 .signupForm-container {
     max-width: 500px;
@@ -58,8 +62,27 @@ button:hover {
         margin: 50px auto;
     }
 }
+
 </style>
+
+
 <div class="signupForm-container">
+    <?php
+        if(isset($_SESSION["errors"]))
+        {
+         ?>
+            <div class="error">
+                <?php 
+                    foreach ($_SESSION["errors"] as $error ) {
+                        print '<li>'.$error.'</li>';
+                    }
+                ?>
+            </div>
+         <?php 
+            unset($_SESSION["errors"]);
+        }
+        ?>
+
   <form action="<?php echo BASEURL . "actions/signup_action.php" ?>" method="POST" class="signup-form">
         <h2>Sign Up</h2>
         <div class="input-group">
