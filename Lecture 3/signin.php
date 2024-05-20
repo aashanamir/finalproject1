@@ -5,6 +5,11 @@
 
 <style>
 
+.error{
+    color: red;
+    list-style: none;
+}
+
 .login-container {
             background-color: #ffffff;
             padding: 20px;
@@ -48,15 +53,30 @@
 </style>
 
 <div class="login-container">
+<?php
+        if(isset($_SESSION["errors"]))
+        {
+         ?>
+            <div class="error">
+                <?php 
+                    foreach ($_SESSION["errors"] as $error ) {
+                        print '<li>'.$error.'</li>';
+                    }
+                ?>
+            </div>
+         <?php 
+            unset($_SESSION["errors"]);
+        }
+        ?>
         <h1>Sign In</h1>
-<form action="#" method="post">
+<form action="<?php echo BASEURL . 'actions/signin_action.php'; ?>" method="post">
     <div class="form-group">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" >
     </div>
     <div class="form-group">
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="password" name="password" >
     </div>
     <div class="form-group">
         <input type="submit" value="Sign In">

@@ -19,6 +19,19 @@ if(isset($_POST))
     print_r($Error);
   }
 
+  if(isset($email))
+  {
+    $conn = db_connect();
+    $sql = "SELECT id FROM `users` WHERE `email` = '$email'";
+    $success = mysqli_query($conn , $sql);
+    $email_row = mysqli_num_rows($success);
+
+    if($email_row > 0) 
+    {
+      $Error[] = "Email Already Exist"; 
+    }
+  }
+
   if(!empty($Error))
   {
     $_SESSION['errors'] = $Error;
